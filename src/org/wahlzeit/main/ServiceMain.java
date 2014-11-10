@@ -146,6 +146,11 @@ public class ServiceMain extends ModelMain {
 		manager.addWebPartHandler(PartUtil.CONTACT_PAGE_NAME, new ShowInfoPageHandler(AccessRights.GUEST, PartUtil.CONTACT_INFO_FILE));
 		manager.addWebPartHandler(PartUtil.IMPRINT_PAGE_NAME, new ShowInfoPageHandler(AccessRights.GUEST, PartUtil.IMPRINT_INFO_FILE));
 		manager.addWebPartHandler(PartUtil.TERMS_PAGE_NAME, new ShowInfoPageHandler(AccessRights.GUEST, PartUtil.TERMS_INFO_FILE));
+		
+		//YAO GUO--Start
+		//GPS map
+		manager.addWebPartHandler(PartUtil.GPSMAP_PAGE_NAME, new ShowInfoPageHandler(AccessRights.GUEST, PartUtil.SHOW_GPSMAP_PAGE_FILE));
+		//YAO GUO--End
 
 		// Flag, Send, Tell, and Options pages
 		temp = manager.addWebPartHandler(PartUtil.FLAG_PHOTO_FORM_NAME, new FlagPhotoFormHandler());

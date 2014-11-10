@@ -156,4 +156,8 @@ public interface PartUtil {
 	public static final String ADMIN_USER_PHOTO_FORM_NAME = "adminUserPhotoForm";
 	public static final String ADMIN_USER_PHOTO_FORM_FILE = "forms/AdminUserPhotoForm";
 	
+	//YAO GUO--Start
+	public static final String GPSMAP_PAGE_NAME = "gpsMap";
+	public static final String SHOW_GPSMAP_PAGE_FILE = "pages/ShowMapPage";
+	//YAO GUO--To
 }
