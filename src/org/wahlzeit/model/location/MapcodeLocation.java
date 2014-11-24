@@ -5,6 +5,11 @@ import java.util.List;
 import com.mapcode.*;
 
 public class MapcodeLocation extends AbstractLocation {
+/**
+ * 
+ * @author YAO GUO
+ *
+ */
 
 	private List <Mapcode> mapcodes;
 	

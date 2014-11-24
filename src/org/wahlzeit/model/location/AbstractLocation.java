@@ -1,6 +1,11 @@
 package org.wahlzeit.model.location;
 
 public abstract class AbstractLocation implements Location {
+/**
+ * 
+ * @author YAO GUO
+ *
+ */
 
 	public String location;
 	public double latitude;

@@ -1,6 +1,11 @@
 package org.wahlzeit.model.location;
 
 public class GPSLocation extends AbstractLocation {
+/**
+ * 
+ * @author YAO GUO
+ *
+ */
 	
 	/***
     * @methodtype constructor
