@@ -2,20 +2,18 @@ package org.wahlzeit.model.location;
 
 public class GPSLocation extends AbstractLocation {
 	
-	private double gpsLatitude = 0;
-	private double gpsLongitude = 0;
-	
-	
 	/***
     * @methodtype constructor
     */
     public GPSLocation(){
+    	super();
     }
 
 	@Override
 	public String getLocation() {
+		this.location = "(" + this.latitude + ", " +  this.longitude + ")";
 		
-		return "(" + gpsLatitude + ", " + gpsLongitude + ")";
+		return this.location;
 	}
 	
 	@Override
@@ -24,9 +22,9 @@ public class GPSLocation extends AbstractLocation {
 	}
 	
 	@Override
-	public void setLocation(double latitude, double longitude) {
-		this.gpsLatitude = latitude;
-        this.gpsLongitude = longitude;
+	public void setLocation(double gpslatitude, double gpslongitude) {
+		this.latitude = gpslatitude;
+        this.longitude = gpslongitude;
 	}
 	
 	/**
@@ -57,8 +55,8 @@ public class GPSLocation extends AbstractLocation {
 	* get Gps Latitude
 	* @methodtype getter
 	*/
-	public double getGpsLatitude() {
-		return gpsLatitude;
+	public double getLatitude() {
+		return this.latitude;
 	}
 
 	/**
@@ -66,23 +64,23 @@ public class GPSLocation extends AbstractLocation {
 	* @methodtype setter
 	*/
 	public void setGpsLatitude(double gpsLatitude) {
-		this.gpsLatitude = gpsLatitude;
+		this.latitude = gpsLatitude;
 	}
 
 	/**
 	* get Gps Longitude
 	* @methodtype getter
 	*/
-	public double getGpsLongitude() {
-		return gpsLongitude;
+	public double getLongitude() {
+		return this.longitude;
 	}
 
 	/**
 	* set Gps Longitude
 	* @methodtype setter
 	*/
-	public void setGpsLongitude(double gpsLongitude) {
-		this.gpsLongitude = gpsLongitude;
+	public void setLongitude(double gpsLongitude) {
+		this.longitude = gpsLongitude;
 	}
 
 }

@@ -2,6 +2,9 @@ package org.wahlzeit.model.location;
 
 public abstract class AbstractLocation implements Location {
 
+	public String location;
+	public double latitude;
+	public double longitude;
 	
 	/**
 	* get the location

@@ -1,5 +1,7 @@
 package org.wahlzeit.model.location;
 
+import java.util.List;
+
 import com.mapcode.*;
 
 public class MapcodeLocation extends AbstractLocation {
@@ -7,7 +9,18 @@ public class MapcodeLocation extends AbstractLocation {
 	private final String MAPCODE_DELIMITER = ".";
 	
 
-	public MapcodeLocation() {
+	private List <Mapcode> mapcodes;
+	
+	public MapcodeLocation(String photoPath)
+	{
+		setLatAndLong(photoPath);
+		this.mapcodes = MapcodeCodec.encode(this.latitude, this.longitude);
+		this.coordinate = createNewCoordinate();
+	}
+	
+	protected String createNewCoordinate() {
+		// TODO Auto-generated method stub
+		return this.mapcodes.get(this.mapcodes.size()-1).toString();
 	}
 	
 	
