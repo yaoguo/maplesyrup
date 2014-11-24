@@ -18,9 +18,8 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package org.wahlzeit.location;
+package org.wahlzeit.model.location;
 
-import java.util.Vector;
 
 /**
  * 
@@ -28,7 +27,26 @@ import java.util.Vector;
  *
  */
 public interface Location {
-
-	abstract Vector locate(String locateMethod);
+	
+	/***
+     * @return the location as string
+     */
+	public String getLocation();
+	
+	/***
+     * @set a location with GPS a coordinate pair
+     */
+	public void setLocation(double latidute, double longitude);
+	
+//    /***
+//    *
+//    * @return the location as a mapcode string
+//    */
+//	public String getLocationMapcode();
+	
+	/***
+     * @set a location with a mapcode String
+     */
+	public void setLocation(String mapcode);
 	
 }
