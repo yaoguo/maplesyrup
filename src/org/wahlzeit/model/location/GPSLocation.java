@@ -1,11 +1,14 @@
 package org.wahlzeit.model.location;
 
+import java.util.StringTokenizer;
+
 public class GPSLocation extends AbstractLocation {
 /**
  * 
  * @author YAO GUO
  *
  */
+	private final String GPS_DELIMITER = ",";
 	
 	/***
     * @methodtype constructor
@@ -13,6 +16,26 @@ public class GPSLocation extends AbstractLocation {
     public GPSLocation(){
     	super();
     }
+    
+	/***
+     * @methodtype constructor
+     */
+    public GPSLocation(String gpsString) {
+		this();
+		parseGPSLocationString(gpsString);
+     }
+
+	/***
+     * @methodtype command
+     */
+	private void parseGPSLocationString(String gpsString) {
+		StringTokenizer strTokenizer = new StringTokenizer(gpsString, GPS_DELIMITER);
+		
+		if(strTokenizer.countTokens() == 2) {
+			this.latitude = Double.parseDouble(strTokenizer.nextToken().trim());
+			this.longitude = Double.parseDouble(strTokenizer.nextToken().trim());
+		}
+	}
 
 	@Override
 	public String getLocation() {

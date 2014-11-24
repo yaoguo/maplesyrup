@@ -23,6 +23,9 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.net.*;
 
+import org.wahlzeit.model.location.GPSLocation;
+import org.wahlzeit.model.location.Location;
+import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 
@@ -53,12 +56,26 @@ public class Photo extends DataObject {
 	public static final String UPLOADED_ON = "uploadedOn";
 	
 	/**
+	 * @author YAO GUO
+	 * constants for location and locate methods
+	 */
+	public static final String LOCATION = "location";
+	public static final String MAPCODE = "MAPCODE";
+	public static final String GPS = "GPS";
+	
+	/**
 	 * 
 	 */
 	public static final int MAX_PHOTO_WIDTH = 420;
 	public static final int MAX_PHOTO_HEIGHT = 600;
 	public static final int MAX_THUMB_PHOTO_WIDTH = 105;
 	public static final int MAX_THUMB_PHOTO_HEIGHT = 150;
+	
+	/**
+	 * @author YAO GUO
+	 * hook location in Photo class
+	 */
+	protected Location location = null;
 	
 	/**
 	 * 
@@ -167,6 +184,19 @@ public class Photo extends DataObject {
 		creationTime = rset.getLong("creation_time");
 
 		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
+		
+		//-start-///////////////
+		String locatMethod = rset.getString("locatMethod");
+		
+		if(locatMethod.equals(MAPCODE)) {
+			location = new MapcodeLocation(rset.getString("location"));
+		} else if(locatMethod.equals(GPS)) {
+			location = new GPSLocation(rset.getString("location"));
+		} else {
+			location = null;
+		}
+		//-end-///////////////
+		
 	}
 	
 	/**
@@ -479,6 +509,22 @@ public class Photo extends DataObject {
 	 */
 	public long getCreationTime() {
 		return creationTime;
+	}
+	
+	/**
+	 * 
+	 * @methodtype get
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	
+	/**
+	 * 
+	 * @methodtype set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 }

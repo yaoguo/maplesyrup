@@ -7,9 +7,9 @@ public abstract class AbstractLocation implements Location {
  *
  */
 
-	public String location;
-	public double latitude;
-	public double longitude;
+	protected String location;
+	protected double latitude;
+	protected double longitude;
 	
 	/**
 	* get the location
