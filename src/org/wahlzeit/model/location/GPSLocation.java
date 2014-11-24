@@ -10,12 +10,12 @@ public class GPSLocation extends AbstractLocation {
     * @methodtype constructor
     */
     public GPSLocation(){
-    	
     }
 
 	@Override
 	public String getLocation() {
-		return null;
+		
+		return "(" + gpsLatitude + ", " + gpsLongitude + ")";
 	}
 	
 	@Override
@@ -27,7 +27,6 @@ public class GPSLocation extends AbstractLocation {
 	public void setLocation(double latitude, double longitude) {
 		this.gpsLatitude = latitude;
         this.gpsLongitude = longitude;
-		
 	}
 	
 	/**
@@ -47,7 +46,9 @@ public class GPSLocation extends AbstractLocation {
 	* @methodtype assertion
 	*/
 	protected void assertValidLongitude(double longitude){
-		
+//      if(!(longitude >= -180 && longitude <= 180)){
+//			throw new IllegalArgumentException("Invalid longitude value: " + longitude);
+//  }
 		assert (!(longitude >= -180 && longitude <= 180)): "Invalid longitude value: " + longitude;
 
     }
