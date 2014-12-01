@@ -6,12 +6,12 @@ public enum RegionCategory implements Category {
  * @author YAO GUO
  *
  */
-	ExtraLight	(1, "Extra Light"),
-	Light		(2, "Light"),
-	Medium		(3, "Medium"),
-	Amber		(4, "Amber"),
-	Dark		(5, "Dark"),
-	Other		(0, "Other");
+	Quebec	(1, "Quebec"),
+	Vermont	(2, "Vermont"),
+	Ontario	(3, "Ontario"),
+	NewYork	(4, "New York"),
+	Maine	(5, "Maine"),
+	Other	(0, "Other");
 	
 	private final String name;
 	private final int intValue;
