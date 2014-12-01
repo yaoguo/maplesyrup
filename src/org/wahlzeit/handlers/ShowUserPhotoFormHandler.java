@@ -61,11 +61,11 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		String photoStatus = us.cfg().asValueString(photo.getStatus());
 		part.addString(Photo.STATUS, photoStatus);
 		
-		//-start-///////////////////////
+		//-start-Yao///////////////////////
 		if(photo instanceof MaplesyrupPhoto) {
 			MaplesyrupPhoto maplesyrupPhoto = (MaplesyrupPhoto)photo;
-			part.addString(MaplesyrupPhoto.SYRUP_CATEGORY, maplesyrupPhoto.getSyrupCategory().toString());// should be SyrupCategoryEnum.getName()
-			part.addString(MaplesyrupPhoto.ORIGIN_CATEGORY, maplesyrupPhoto.getOriginCategory().toString());// should be OriginCategoryEnum.getName()
+			part.addString(MaplesyrupPhoto.SYRUP_CATEGORY, maplesyrupPhoto.getSyrupCategory().getTypeName());
+			part.addString(MaplesyrupPhoto.REGION_CATEGORY, maplesyrupPhoto.getRegionCategory().getTypeName());
 		}
 		
 		Location location = photo.getLocation();
@@ -74,7 +74,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
  		} else {
  			part.addString(Photo.LOCATION, "");
  		}
- 		//-end-///////////////////////
+ 		//-end-Yao///////////////////////
 
 		part.addString(Photo.UPLOADED_ON, us.cfg().asDateString(photo.getCreationTime()));
 		part.addString(Photo.LINK, HtmlUtil.asHref(getResourceAsRelativeHtmlPathString(id)));
