@@ -24,6 +24,9 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.MaplesyrupPhoto;
+import org.wahlzeit.model.domain.RegionCategory;
+import org.wahlzeit.model.domain.SyrupCategory;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
@@ -68,6 +71,19 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			String sourceFileName = us.getAsString(args, "fileName");
 			File file = new File(sourceFileName);
 			Photo photo = pm.createPhoto(file);
+			
+			//-start-Yao///////////////////////
+			if(photo instanceof MaplesyrupPhoto) {
+				MaplesyrupPhoto maplesyrupPhoto = (MaplesyrupPhoto)photo;
+				
+				
+				SyrupCategory syrupCategory = SyrupCategory.getFromString(us.getAsString(args, "syrupCategory"));
+				RegionCategory regionCategory = RegionCategory.getFromString(us.getAsString(args, "regionCategory"));
+				
+				maplesyrupPhoto.setSyrupCategory(syrupCategory);
+				maplesyrupPhoto.setRegionCategory(regionCategory);			
+			}
+			//-end-Yao///////////////////////
 
 			String targetFileName = SysConfig.getBackupDir().asString() + photo.getId().asString();
 			createBackup(sourceFileName, targetFileName);
