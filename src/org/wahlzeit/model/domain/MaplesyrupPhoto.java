@@ -1,5 +1,8 @@
 package org.wahlzeit.model.domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
 
@@ -9,13 +12,19 @@ public class MaplesyrupPhoto extends Photo {
  * @author YAO GUO
  *
  */
-
+	///////////////////
+	/// fields
+	///////////////////
 	public static final String SYRUP_CATEGORY = "syrupCategory";
-	public static final String ORIGIN_CATEGORY = "originCategory";
+	public static final String REGION_CATEGORY = "regionCategory";
 	
 	protected SyrupCategory syrupCategory;
-	protected OriginCategory originCategory;
+	protected RegionCategory regionCategory;
 	
+	
+	///////////////////
+	/// constructor
+	///////////////////
 	/**
 	 * @methodtype constructor
 	 */
@@ -26,29 +35,48 @@ public class MaplesyrupPhoto extends Photo {
 	
 	/**
 	 * @methodtype constructor
+	 * @param PhotoId
 	 */
 	public MaplesyrupPhoto(PhotoId fotoID) {
 		super(fotoID);
 		initialize();
 	}
-
+	
 	/**
-	 * @methodtype getter
+	 * @throws SQLException 
+	 * @methodtype constructor
+	 */
+	public MaplesyrupPhoto(ResultSet rset) throws SQLException {
+		super(rset);
+	}
+	
+	///////////////////
+	/// methods
+	///////////////////	
+	/**
+	 * Getter method for the syrup category
+	 * 
+	 * @return the syrup category
+	 * @methodtype get
 	 */
 	public SyrupCategory getSyrupCategory() {
 		//precondition
 		assert syrupCategory != null;
+		
 		return syrupCategory;
 	}
-
+	
 	/**
-	 * @methodtype setter
+	 * Setter method for the bow category
+	 * 
+	 * @methodtype set
 	 */
 	public void setSyrupCategory(SyrupCategory syrupCategory) {
 		//precondition
 		assert syrupCategory != null;
 		
 		this.syrupCategory = syrupCategory;
+		incWriteCount();
 		
 		//postcondition
 		assert this.syrupCategory != null;
@@ -56,36 +84,67 @@ public class MaplesyrupPhoto extends Photo {
 	}
 
 	/**
-	 * @methodtype getter
+	 * Getter method for the region category
+	 * 
+	 * @return the region category
+	 * @methodtype get
 	 */
-	public OriginCategory getOriginCategory() {
+	public RegionCategory getRegionCategory() {
 		//precondition
-		assert originCategory != null;
-		return originCategory;
+		assert regionCategory != null;
+		
+		return regionCategory;
 	}
-
+	
 	/**
-	 * @methodtype setter
+	 * Setter method for the region category
+	 * 
+	 * @methodtype set
 	 */
-	public void setOriginCategory(OriginCategory originCategory) {
+	public void setRegionCategory(RegionCategory regionCategory) {
 		//precondition
-		assert originCategory != null;
-				
-		this.originCategory = originCategory;
+		assert regionCategory != null;
+		
+		this.regionCategory = regionCategory;
+		incWriteCount();
 		
 		//postcondition
-		assert this.originCategory != null;
-		assert this.originCategory == originCategory;
+		assert this.regionCategory != null;
+		assert this.regionCategory == regionCategory;
+	}
+	
+	/**
+	 * @throws SQLException 
+	 * 
+	 */
+	public void readFrom(ResultSet rset) throws SQLException {
+		super.readFrom(rset);
+		
+		syrupCategory = SyrupCategory.getFromInt(rset.getInt(SYRUP_CATEGORY));
+		regionCategory = RegionCategory.getFromInt(rset.getInt(REGION_CATEGORY));
+	}
+	
+	/**
+	 * @throws SQLException
+	 */
+	public void writeOn(ResultSet rset) throws SQLException {
+		super.writeOn(rset);
+		
+		rset.updateInt(SYRUP_CATEGORY, syrupCategory.asInt());
+		rset.updateInt(REGION_CATEGORY, regionCategory.asInt());
 	}
 	
 	/**
 	 * @methodtype initialization
 	 */
 	private void initialize() {
-		syrupCategory = new SyrupCategory();
-		originCategory = new OriginCategory();
+		
+		syrupCategory = SyrupCategory.Other;
+		regionCategory = RegionCategory.Other;
 		
 		assertInvariants();
+		
+		incWriteCount();
 	}
 	
 	/**
@@ -93,7 +152,7 @@ public class MaplesyrupPhoto extends Photo {
 	 */
 	private void assertInvariants() {
 		assert syrupCategory != null;
-		assert originCategory != null;
+		assert regionCategory != null;
 	}
 
 }
