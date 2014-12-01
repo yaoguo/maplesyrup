@@ -1,78 +1,78 @@
 package org.wahlzeit.model.domain;
 
-public class SyrupCategory extends AbstractCategory {
+public enum SyrupCategory implements Category {
 /**
  * 
  * @author YAO GUO
  *
  */
+	ExtraLight	(1, "Extra Light"),
+	Light		(2, "Light"),
+	Medium		(3, "Medium"),
+	Amber		(4, "Amber"),
+	Dark		(5, "Dark"),
+	Other		(0, "Other");
 	
-	SyrupCategoryEnum syrupCategory;
+	private final String name;
+	private final int intValue;
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public SyrupCategory() {
-		this(SyrupCategoryEnum.Classic);
+	SyrupCategory(int intValue, String name) {
+		this.intValue = intValue;
+		this.name = name;
+	}
+	
+	/**
+	 * @para intValue, retrieve syrup category by integer values
+	 * @return enumeration value
+	 */
+	public static SyrupCategory getFromInt(int intValue) {
+		SyrupCategory[] syrupCategories = values();
+
+		for(int i = 0; i < syrupCategories.length; i++) {
+			if(syrupCategories[i].asInt() == intValue) {
+				return syrupCategories[i];
+			}
+		}
+		
+		return Other;
+	}
+	
+	/**
+	 * @para name, retrieve syrup category by String
+	 * @return enumeration value
+	 */
+	public static SyrupCategory getFromString(String name) {
+		SyrupCategory[] syrupCategories = values();
+		
+		for(int i = 0; i < syrupCategories.length; i++) {
+			if(name!=null && syrupCategories[i].getTypeName().equals(name.trim())) {
+				return syrupCategories[i];
+			}
+		}
+		
+		return Other;
 	}
 
-	/**
-	 * @methodtype constructor
-	 */
-	public SyrupCategory(SyrupCategoryEnum syrupCategory) {
-		initialize();
-		this.syrupCategory = syrupCategory;
-		
-		assertInvariants();
+	@Override
+	public String asString() {
+		return "Syrup category: " + name;
 	}
-	
-	/**
-	 * 
-	 * @return syrupCategory
-	 * @methodtype getter
-	 */
-	public SyrupCategoryEnum getSyrupCategory() {
-		//precondition
-		assert syrupCategory != null;
-		
-		return syrupCategory;
-	}
-	
-	/**
-	 * 
-	 * @param 
-	 * @methodtype setter
-	 */
-	public void setSyrupCategory(SyrupCategoryEnum syrupCategory) {
-		//precondition
-		assert syrupCategory != null;
-		
-		this.syrupCategory = syrupCategory;
-		
-		//postcondition
-		assert this.syrupCategory != null;
-		assert this.syrupCategory == syrupCategory;
-	}
-	
-	/**
-	 * 
-	 * @methodtype initialization
-	 */
-	private void initialize() {
-		syrupCategory = SyrupCategoryEnum.Classic;
-		
-		//postcondition
-		assert syrupCategory != null;
-	}
-	
-	/**
-	 * 
-	 * @methodtype assertion
-	 */
-	protected void assertInvariants() {
-		
-		assert syrupCategory != null;
-	}
-	
 
+	@Override
+	public int asInt() {
+		return intValue;
+	}
+
+	@Override
+	public Category[] getAllValues() {
+		return values();
+	}
+
+	@Override
+	public String getTypeName() {
+		return name;
+	}
 }
