@@ -29,6 +29,9 @@ public enum SyrupCategory implements Category {
 	 * @return enumeration value
 	 */
 	public static SyrupCategory getFromInt(int intValue) {
+		
+		assertIsValidSyrupCategoryAsInt(intValue);
+		
 		SyrupCategory[] syrupCategories = values();
 
 		for(int i = 0; i < syrupCategories.length; i++) {
@@ -55,6 +58,18 @@ public enum SyrupCategory implements Category {
 		
 		return Other;
 	}
+	
+	/**
+     * asserts that int representation is valid, must be between 0 and 5
+     *
+     * @param myValue int representation of SyrupCategory
+     * @throws IllegalArgumentException
+     */
+    protected static void assertIsValidSyrupCategoryAsInt(int myValue) throws IllegalArgumentException {
+        if ((myValue < 0) || (myValue > 5)) {
+            throw new IllegalArgumentException("invalid SyrupCategory int: " + myValue);
+        }
+    }
 
 	@Override
 	public String asString() {

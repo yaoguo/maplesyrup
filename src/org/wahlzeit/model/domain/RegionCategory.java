@@ -1,6 +1,8 @@
 package org.wahlzeit.model.domain;
 
-public enum RegionCategory implements Category {
+import org.wahlzeit.utils.EnumValue;
+
+public enum RegionCategory implements EnumValue {
 /**
  * 
  * @author YAO GUO
@@ -29,6 +31,9 @@ public enum RegionCategory implements Category {
 	 * @return enumeration value
 	 */
 	public static RegionCategory getFromInt(int intValue) {
+		
+		assertIsValidRegionCategoryAsInt(intValue);
+		
 		RegionCategory[] regionCategories = values();
 
 		for(int i = 0; i < regionCategories.length; i++) {
@@ -55,6 +60,18 @@ public enum RegionCategory implements Category {
 		
 		return Other;
 	}
+	
+	/**
+     * asserts that int representation is valid, must be between 0 and 5
+     *
+     * @param myValue int representation of RegionCategory
+     * @throws IllegalArgumentException
+     */
+    protected static void assertIsValidRegionCategoryAsInt(int myValue) throws IllegalArgumentException {
+        if ((myValue < 0) || (myValue > 5)) {
+            throw new IllegalArgumentException("invalid RegionCategory int: " + myValue);
+        }
+    }
 
 	@Override
 	public String asString() {
@@ -67,13 +84,13 @@ public enum RegionCategory implements Category {
 	}
 
 	@Override
-	public Category[] getAllValues() {
-		return values();
+	public String getTypeName() {
+		return name;
 	}
 
 	@Override
-	public String getTypeName() {
-		return name;
+	public EnumValue[] getAllValues() {
+		return null;
 	}
 
 }
