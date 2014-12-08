@@ -90,7 +90,8 @@ public enum RegionCategory implements EnumValue {
 
 	@Override
 	public EnumValue[] getAllValues() {
-		return null;
+		RegionCategory[] regionCategories = values();
+		return regionCategories;
 	}
 
 }

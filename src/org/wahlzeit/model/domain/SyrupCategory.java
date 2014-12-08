@@ -1,6 +1,8 @@
 package org.wahlzeit.model.domain;
 
-public enum SyrupCategory implements Category {
+import org.wahlzeit.utils.EnumValue;
+
+public enum SyrupCategory implements EnumValue {
 /**
  * 
  * @author YAO GUO
@@ -72,22 +74,24 @@ public enum SyrupCategory implements Category {
     }
 
 	@Override
-	public String asString() {
-		return "Syrup category: " + name;
-	}
-
-	@Override
 	public int asInt() {
 		return intValue;
 	}
 
 	@Override
-	public Category[] getAllValues() {
-		return values();
+	public String asString() {
+		return "Syrup category: " + name;
+	}
+
+	@Override
+	public EnumValue[] getAllValues() {
+		SyrupCategory[] syrupCategories = values();
+		return syrupCategories;
 	}
 
 	@Override
 	public String getTypeName() {
 		return name;
 	}
+
 }
