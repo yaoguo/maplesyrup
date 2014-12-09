@@ -64,8 +64,9 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		//-start-Yao///////////////////////
 		if(photo instanceof MaplesyrupPhoto) {
 			MaplesyrupPhoto maplesyrupPhoto = (MaplesyrupPhoto)photo;
-			part.addString(MaplesyrupPhoto.SYRUP_CATEGORY, maplesyrupPhoto.getSyrupCategory().getTypeName());
-			part.addString(MaplesyrupPhoto.REGION_CATEGORY, maplesyrupPhoto.getRegionCategory().getTypeName());
+			part.addString(MaplesyrupPhoto.REGION_CATEGORY, maplesyrupPhoto.getMaplesyrup().getRegionCategory().getTypeName());
+			part.addString(MaplesyrupPhoto.SYRUP_CATEGORY, maplesyrupPhoto.getMaplesyrup().getSyrupCategory().getTypeName());
+			part.addString(MaplesyrupPhoto.QUALITY, maplesyrupPhoto.getMaplesyrup().getQuality().asString());
 		}
 		
 		Location location = photo.getLocation();

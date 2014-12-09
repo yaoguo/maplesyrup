@@ -80,4 +80,10 @@ public class MapcodeLocation extends AbstractLocation {
 		mapcodes = MapcodeCodec.encode(gpslatitude, gpslongitude);
 		location = createMapcodeLocation();
 	}
+
+	@Override
+	public String asString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

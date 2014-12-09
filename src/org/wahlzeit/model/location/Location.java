@@ -49,4 +49,10 @@ public interface Location {
      */
 	public void setLocation(String mapcode);
 	
+	/**
+	 * 
+	 * @methodtype convertion
+	 */
+	public String asString();
+	
 }

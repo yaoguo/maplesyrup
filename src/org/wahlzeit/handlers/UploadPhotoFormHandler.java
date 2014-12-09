@@ -24,7 +24,10 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.Maplesyrup;
+import org.wahlzeit.model.domain.MaplesyrupFactory;
 import org.wahlzeit.model.domain.MaplesyrupPhoto;
+import org.wahlzeit.model.domain.Quality;
 import org.wahlzeit.model.domain.RegionCategory;
 import org.wahlzeit.model.domain.SyrupCategory;
 import org.wahlzeit.services.*;
@@ -72,19 +75,29 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			File file = new File(sourceFileName);
 			Photo photo = pm.createPhoto(file);
 			
-			//-start-Yao///////////////////////
 			if(photo instanceof MaplesyrupPhoto) {
 				MaplesyrupPhoto maplesyrupPhoto = (MaplesyrupPhoto)photo;
 				
+				String qualityScale = us.getAsString(args, "qualityScale");
 				
-				SyrupCategory syrupCategory = SyrupCategory.getFromString(us.getAsString(args, "syrupCategory"));
-				RegionCategory regionCategory = RegionCategory.getFromString(us.getAsString(args, "regionCategory"));
+				int qualityValue;
+				try {
+					qualityValue = Integer.parseInt(us.getAsString(args, "qualityValue"));
+				} catch(Exception e) {
+					qualityValue = 0;
+				}
 				
-				maplesyrupPhoto.setSyrupCategory(syrupCategory);
-				maplesyrupPhoto.setRegionCategory(regionCategory);			
+				MaplesyrupFactory factory = MaplesyrupFactory.getInstance();
+				
+				RegionCategory regionCategory = factory.createRegionCategory(us.getAsString(args, "regionCategory"));
+				SyrupCategory syrupCategory = factory.createSyrupCategory(us.getAsString(args, "syrupCategory"));
+				Quality quality = MaplesyrupFactory.getInstance().createQuality(qualityValue, Quality.Scales.getFromString(qualityScale));
+		
+				Maplesyrup maplesyrup = factory.createMaplesyrupObject(regionCategory, syrupCategory, quality);
+				
+				maplesyrupPhoto.setMaplesyrup(maplesyrup);				
 			}
-			//-end-Yao///////////////////////
-
+			
 			String targetFileName = SysConfig.getBackupDir().asString() + photo.getId().asString();
 			createBackup(sourceFileName, targetFileName);
 		

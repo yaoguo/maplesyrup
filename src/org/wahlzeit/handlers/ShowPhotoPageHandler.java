@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.MaplesyrupPhoto;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
@@ -159,11 +160,21 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
 	 */
 	protected void makePhotoCaption(UserSession us, WebPart page) {
 		Photo photo = us.getPhoto();
-		// String photoId = photo.getId().asString();
-			
 		WebPart caption = createWebPart(us, PartUtil.CAPTION_INFO_FILE);
 		caption.addString(Photo.CAPTION, getPhotoCaption(us, photo));
-		page.addWritable(Photo.CAPTION, caption);
+		
+		assert photo!=null;
+		
+		if(photo.getLocation() != null) {
+			caption.addString(Photo.LOCATION, photo.getLocation().asString());
+		}
+		
+		if(photo instanceof MaplesyrupPhoto) {
+			MaplesyrupPhoto maplesyrupPhoto = (MaplesyrupPhoto)photo;
+			caption.addString(MaplesyrupPhoto.REGION_CATEGORY, maplesyrupPhoto.getMaplesyrup().getRegionCategory().getTypeName());
+			caption.addString(MaplesyrupPhoto.SYRUP_CATEGORY, maplesyrupPhoto.getMaplesyrup().getSyrupCategory().getTypeName());
+			caption.addString(MaplesyrupPhoto.QUALITY, maplesyrupPhoto.getMaplesyrup().getQuality().asString());
+		}
 	}
 
 	/**

@@ -25,6 +25,7 @@ import java.sql.*;
 import java.util.*;
 
 import org.wahlzeit.main.*;
+import org.wahlzeit.model.domain.MaplesyrupPhotoFactory;
 import org.wahlzeit.services.*;
 
 /**
@@ -137,7 +138,9 @@ public class PhotoManager extends ObjectManager {
 	 * 
 	 */
 	protected Photo createObject(ResultSet rset) throws SQLException {
-		return PhotoFactory.getInstance().createPhoto(rset);
+		//return PhotoFactory.getInstance().createPhoto(rset);
+		
+		return MaplesyrupPhotoFactory.getInstance().createPhoto(rset);
 	}
 	
 	/**

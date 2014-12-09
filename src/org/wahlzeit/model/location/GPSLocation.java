@@ -111,4 +111,10 @@ public class GPSLocation extends AbstractLocation {
 		this.longitude = gpsLongitude;
 	}
 
+	@Override
+	public String asString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
