@@ -186,11 +186,11 @@ public class Photo extends DataObject {
 		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
 		
 		//-start-///////////////
-		String locatMethod = rset.getString("locatMethod");
+		String locateMethod = rset.getString("locateMethod");
 		
-		if(locatMethod.equals(MAPCODE)) {
+		if(locateMethod.equals(MAPCODE)) {
 			location = new MapcodeLocation(rset.getString("location"));
-		} else if(locatMethod.equals(GPS)) {
+		} else if(locateMethod.equals(GPS)) {
 			location = new GPSLocation(rset.getString("location"));
 		} else {
 			location = null;
