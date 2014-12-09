@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.model.domain.Quality.Scales;
 
 public class MaplesyrupPhoto extends Photo {
 /**
@@ -12,19 +13,14 @@ public class MaplesyrupPhoto extends Photo {
  * @author YAO GUO
  *
  */
-	///////////////////
-	/// fields
-	///////////////////
 	public static final String SYRUP_CATEGORY = "syrupCategory";
 	public static final String REGION_CATEGORY = "regionCategory";
+	public static final String QUALITY = "quality";
+	public static final String QUALITY_SCALE = "qualityScale";
+	public static final String QUALITY_VALUE = "qualityValue";
+
+	protected Maplesyrup maplesyrup;
 	
-	protected SyrupCategory syrupCategory;
-	protected RegionCategory regionCategory;
-	
-	
-	///////////////////
-	/// constructor
-	///////////////////
 	/**
 	 * @methodtype constructor
 	 */
@@ -50,20 +46,15 @@ public class MaplesyrupPhoto extends Photo {
 		super(rset);
 	}
 	
-	///////////////////
-	/// methods
-	///////////////////	
 	/**
-	 * Getter method for the syrup category
+	 * Getter method of the domain class
 	 * 
-	 * @return the syrup category
+	 * @return the domain class
 	 * @methodtype get
 	 */
-	public SyrupCategory getSyrupCategory() {
-		//precondition
-		assert syrupCategory != null;
+	public Maplesyrup getMaplesyrup() {
 		
-		return syrupCategory;
+		return maplesyrup;
 	}
 	
 	/**
@@ -71,46 +62,16 @@ public class MaplesyrupPhoto extends Photo {
 	 * 
 	 * @methodtype set
 	 */
-	public void setSyrupCategory(SyrupCategory syrupCategory) {
+	public void setMaplesyrup(Maplesyrup maplesyrup) {
 		//precondition
-		assert syrupCategory != null;
+		assert maplesyrup != null;
 		
-		this.syrupCategory = syrupCategory;
+		this.maplesyrup = maplesyrup;
 		incWriteCount();
 		
 		//postcondition
-		assert this.syrupCategory != null;
-		assert this.syrupCategory == syrupCategory;
-	}
-
-	/**
-	 * Getter method for the region category
-	 * 
-	 * @return the region category
-	 * @methodtype get
-	 */
-	public RegionCategory getRegionCategory() {
-		//precondition
-		assert regionCategory != null;
-		
-		return regionCategory;
-	}
-	
-	/**
-	 * Setter method for the region category
-	 * 
-	 * @methodtype set
-	 */
-	public void setRegionCategory(RegionCategory regionCategory) {
-		//precondition
-		assert regionCategory != null;
-		
-		this.regionCategory = regionCategory;
-		incWriteCount();
-		
-		//postcondition
-		assert this.regionCategory != null;
-		assert this.regionCategory == regionCategory;
+		assert this.maplesyrup != null;
+		assert this.maplesyrup == maplesyrup;
 	}
 	
 	/**
@@ -120,8 +81,15 @@ public class MaplesyrupPhoto extends Photo {
 	public void readFrom(ResultSet rset) throws SQLException {
 		super.readFrom(rset);
 		
-		syrupCategory = SyrupCategory.getFromInt(rset.getInt(SYRUP_CATEGORY));
-		regionCategory = RegionCategory.getFromInt(rset.getInt(REGION_CATEGORY));
+		SyrupCategory syrupCategory = MaplesyrupFactory.getInstance().createSyrupCategory(rset.getInt(SYRUP_CATEGORY));
+		RegionCategory regionCategory = MaplesyrupFactory.getInstance().createRegionCategory(rset.getInt(REGION_CATEGORY));
+		
+		int qualityValue = rset.getInt(QUALITY_VALUE);
+		int qualityScaleAsInt = rset.getInt(QUALITY_SCALE);
+		
+		Quality qualt = MaplesyrupFactory.getInstance().createQuality(qualityValue, Quality.Scales.getFromInt(qualityScaleAsInt));
+		 
+		maplesyrup = new Maplesyrup(regionCategory, syrupCategory, qualt);
 	}
 	
 	/**
@@ -130,8 +98,10 @@ public class MaplesyrupPhoto extends Photo {
 	public void writeOn(ResultSet rset) throws SQLException {
 		super.writeOn(rset);
 		
-		rset.updateInt(SYRUP_CATEGORY, syrupCategory.asInt());
-		rset.updateInt(REGION_CATEGORY, regionCategory.asInt());
+		rset.updateInt(REGION_CATEGORY, maplesyrup.getRegionCategory().asInt());
+		rset.updateInt(SYRUP_CATEGORY, maplesyrup.getSyrupCategory().asInt());
+		rset.updateInt(QUALITY_VALUE, maplesyrup.getQuality().getValue());
+		rset.updateInt(QUALITY_SCALE, maplesyrup.getQuality().getScale().asInt());
 	}
 	
 	/**
@@ -139,8 +109,7 @@ public class MaplesyrupPhoto extends Photo {
 	 */
 	private void initialize() {
 		
-		syrupCategory = SyrupCategory.Other;
-		regionCategory = RegionCategory.Other;
+		maplesyrup = new Maplesyrup();
 		
 		assertInvariants();
 		
@@ -151,8 +120,6 @@ public class MaplesyrupPhoto extends Photo {
 	 * @methodtype class assertion
 	 */
 	private void assertInvariants() {
-		assert syrupCategory != null;
-		assert regionCategory != null;
+		assert maplesyrup != null;
 	}
-
 }

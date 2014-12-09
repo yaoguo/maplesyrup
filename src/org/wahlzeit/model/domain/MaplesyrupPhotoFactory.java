@@ -8,6 +8,10 @@ import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.services.SysLog;
 
 public class MaplesyrupPhotoFactory extends PhotoFactory {
+/**
+  * 
+  * @author Yao Guo
+  */
 	
 	/**
 	 * the singleton instance is initialized from the outside.
