@@ -30,8 +30,12 @@ CREATE TABLE photos (
 	praise_sum integer,
 	no_votes integer,
 	creation_time bigint,
-	locatMethod text,
-	location text
+	locateMethod text,
+	location text,
+	regionCategory text,
+	syrupCategory text,
+	qualityScale integer,
+	qualityValue integer	
 );
 
 CREATE TABLE tags (
