@@ -46,6 +46,7 @@ public class PhotoFactory {
 			setInstance(new PhotoFactory());
 		}
 		
+		assertInvariants();
 		return instance;
 	}
 	
@@ -58,6 +59,7 @@ public class PhotoFactory {
 		}
 		
 		instance = photoFactory;
+		assertInvariants();
 	}
 	
 	/**
@@ -107,6 +109,15 @@ public class PhotoFactory {
 	 */
 	public PhotoTagCollector createPhotoTagCollector() {
 		return new PhotoTagCollector();
+	}
+	
+	/**
+	* Method that checks the class invariants
+	*/
+	private static void assertInvariants() {
+		if(instance == null) {
+			throw new IllegalStateException("Illegal state of the class 'PhotoFactory'");
+		}
 	}
 
 }
