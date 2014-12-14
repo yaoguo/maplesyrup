@@ -16,7 +16,7 @@ public class MaplesyrupPhotoFactory extends PhotoFactory {
 	/**
 	 * the singleton instance is initialized from the outside.
 	 */
-	private static MaplesyrupPhotoFactory instance = null;
+	private static MaplesyrupPhotoFactory instance;
 
 	/**
 	 * Public singleton access method.
@@ -24,9 +24,11 @@ public class MaplesyrupPhotoFactory extends PhotoFactory {
 	public static synchronized MaplesyrupPhotoFactory getInstance() {
 		if (instance == null) {
 			SysLog.logSysInfo("setting spcified MaplesyrupPhotoFactory");
-			setInstance(new MaplesyrupPhotoFactory());
+//			setInstance(new MaplesyrupPhotoFactory());
+			instance = new MaplesyrupPhotoFactory();
 		}
 		
+		assertInvariants();
 		return instance;
 	}
 
@@ -55,5 +57,13 @@ public class MaplesyrupPhotoFactory extends PhotoFactory {
 	public Photo createPhoto(ResultSet rs) throws SQLException {
 		return new MaplesyrupPhoto(rs);
 	}
-
+	
+	/**
+	* Method that checks the class invariants
+	*/
+	private static void assertInvariants() {
+		if(instance == null) {
+			throw new IllegalStateException("Illegal state of the class 'MaplesyrupPhotoFactory'");
+		}
+	}
 }
