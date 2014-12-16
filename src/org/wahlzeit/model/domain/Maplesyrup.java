@@ -76,4 +76,20 @@ public class Maplesyrup {
 		}
 	}
 
+	public MaplesyrupType getType() {
+		return type;
+	}
+
+	public void setType(MaplesyrupType type) {
+		this.type = type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }
