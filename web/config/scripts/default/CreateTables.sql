@@ -66,6 +66,12 @@ CREATE TABLE maplesyrupTypes (
 	usage text
 );
 
+CREATE TABLE maplesyrups (
+	id integer PRIMARY KEY,
+	type text
+);
+
+
 INSERT INTO globals (id, last_user_id, last_photo_id, last_case_id, last_session_id)
 	VALUES (0, 1, 0, 0, 0);
 
