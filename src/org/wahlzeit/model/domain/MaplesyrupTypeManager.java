@@ -90,7 +90,7 @@ public class MaplesyrupTypeManager extends ObjectManager {
 	/**
 	 * 
 	 */
-	private void addMaplesyrupType(MaplesyrupType maplesyrupType) {
+	public void addMaplesyrupType(MaplesyrupType maplesyrupType) {
 		doAddMaplesyrupType(maplesyrupType.getId(), maplesyrupType);
 
 		try {
