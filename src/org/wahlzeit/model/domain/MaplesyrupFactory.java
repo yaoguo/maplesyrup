@@ -1,5 +1,7 @@
 package org.wahlzeit.model.domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.wahlzeit.model.domain.Quality.Scales;
@@ -49,13 +51,15 @@ public class MaplesyrupFactory {
 	 * @return Returns the new maplesyrup object
 	 * @methodtype factory
 	 */
-	public Maplesyrup createMaplesyrupObject(RegionCategory regionCategory, SyrupCategory syrupCategory, Quality qualityScore) {
+	public Maplesyrup createMaplesyrupObject(RegionCategory regionCategory, 
+			SyrupCategory syrupCategory, Quality qualityScore, MaplesyrupType type) {
 		//precondition
 		assert regionCategory != null;
 		assert syrupCategory != null;
 		assert qualityScore != null;
+		assert type != null;
 
-		return new Maplesyrup(regionCategory, syrupCategory, qualityScore);
+		return new Maplesyrup(regionCategory, syrupCategory, qualityScore, type);
 	}
 
 	/**
@@ -153,5 +157,21 @@ public class MaplesyrupFactory {
 		}
 
 		return instance;
+	}
+	
+	public MaplesyrupType createMaplesyrupType(String name, String usage) {
+			return new MaplesyrupType(name, usage);
+	}
+		
+	public MaplesyrupType createMaplesyrupType(ResultSet rset) throws SQLException {
+		return new MaplesyrupType(rset);
+	}
+	
+	public Maplesyrup createMaplesyrup() {
+		return new Maplesyrup();
+	}
+	
+	public Maplesyrup createMaplesyrup(ResultSet rset) throws SQLException {
+		return new Maplesyrup();
 	}
 }
