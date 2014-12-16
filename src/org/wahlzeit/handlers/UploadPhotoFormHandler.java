@@ -27,6 +27,8 @@ import org.wahlzeit.model.*;
 import org.wahlzeit.model.domain.Maplesyrup;
 import org.wahlzeit.model.domain.MaplesyrupFactory;
 import org.wahlzeit.model.domain.MaplesyrupPhoto;
+import org.wahlzeit.model.domain.MaplesyrupType;
+import org.wahlzeit.model.domain.MaplesyrupTypeManager;
 import org.wahlzeit.model.domain.Quality;
 import org.wahlzeit.model.domain.RegionCategory;
 import org.wahlzeit.model.domain.SyrupCategory;
@@ -92,10 +94,15 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 				RegionCategory regionCategory = factory.createRegionCategory(us.getAsString(args, "regionCategory"));
 				SyrupCategory syrupCategory = factory.createSyrupCategory(us.getAsString(args, "syrupCategory"));
 				Quality quality = MaplesyrupFactory.getInstance().createQuality(qualityValue, Quality.Scales.getFromString(qualityScale));
-		
-				Maplesyrup maplesyrup = factory.createMaplesyrupObject(regionCategory, syrupCategory, quality);
+				MaplesyrupType maplesyrupType = factory.createMaplesyrupType(us.getAsString(args, "maplesyrupTypeName"),
+						us.getAsString(args, "maplesyrupTypeUsage"));
 				
-				maplesyrupPhoto.setMaplesyrup(maplesyrup);				
+				MaplesyrupTypeManager.getInstance().addMaplesyrupType(maplesyrupType);
+				MaplesyrupTypeManager.getInstance().saveMaplesyrupType(maplesyrupType);
+				
+				Maplesyrup maplesyrup = factory.createMaplesyrupObject(regionCategory, syrupCategory, quality, maplesyrupType);
+
+				maplesyrupPhoto.setMaplesyrup(maplesyrup);	
 			}
 			
 			String targetFileName = SysConfig.getBackupDir().asString() + photo.getId().asString();
