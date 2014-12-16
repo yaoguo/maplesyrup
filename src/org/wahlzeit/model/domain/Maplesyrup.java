@@ -6,24 +6,33 @@ public class Maplesyrup {
   * @author Yao Guo
   */
 
-	protected final RegionCategory regionCategory;
-	protected final SyrupCategory syrupCategory;
-	protected final Quality quality;
+	private RegionCategory regionCategory;
+	private SyrupCategory syrupCategory;
+	private Quality quality;
+	protected MaplesyrupType type;
+	protected int id;
 
 	/**
 	 * @methodtype constructor
 	 */
 	protected Maplesyrup() {
-		this(RegionCategory.Other, SyrupCategory.Other, MaplesyrupFactory.getInstance().createQuality(0, Quality.Scales.POINT));
+		this(RegionCategory.Other, 
+			SyrupCategory.Other, 
+			MaplesyrupFactory.getInstance().createQuality(0, Quality.Scales.POINT),
+			null);
 	}
 	
 	/**
 	 * @methodtype constructor
 	 */
-	protected Maplesyrup(RegionCategory regionCategory, SyrupCategory syrupCategory, Quality quality) {
+	protected Maplesyrup(RegionCategory regionCategory, 
+			SyrupCategory syrupCategory, 
+			Quality quality,
+			MaplesyrupType type) {
 		this.regionCategory = regionCategory;
 		this.syrupCategory = syrupCategory;
 		this.quality = quality;
+		this.type = type;
 		
 		assertInvariants();
 	}
