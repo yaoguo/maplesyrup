@@ -89,7 +89,7 @@ public class MaplesyrupPhoto extends Photo {
 		
 		Quality qualt = MaplesyrupFactory.getInstance().createQuality(qualityValue, Quality.Scales.getFromInt(qualityScaleAsInt));
 		 
-		maplesyrup = new Maplesyrup(regionCategory, syrupCategory, qualt);
+		maplesyrup = new Maplesyrup(regionCategory, syrupCategory, qualt, null);
 	}
 	
 	/**
