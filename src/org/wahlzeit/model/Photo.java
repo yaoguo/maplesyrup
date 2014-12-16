@@ -23,6 +23,7 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.net.*;
 
+import org.wahlzeit.model.domain.Quality.Scales;
 import org.wahlzeit.model.location.GPSLocation;
 import org.wahlzeit.model.location.Location;
 import org.wahlzeit.model.location.MapcodeLocation;
@@ -59,9 +60,13 @@ public class Photo extends DataObject {
 	 * @author YAO GUO
 	 * constants for location and locate methods
 	 */
-	public static final String LOCATION = "location";
+	public static final String LOCATEMETHOD = "locateMethod";
 	public static final String MAPCODE = "MAPCODE";
 	public static final String GPS = "GPS";
+	public static final String LOCATION = "location";
+	public static final String REGIONCATEGORY = "regionCategory";
+	public static final String SYRUPCATEGORY = "syrupCategory";
+	public static final String QUALITYGRADE = "qualityGrade";
 	
 	/**
 	 * 
@@ -76,6 +81,10 @@ public class Photo extends DataObject {
 	 * hook location in Photo class
 	 */
 	protected Location location = null;
+	protected String regionCategory = "";
+	protected String syrupCategory = "";
+	protected Scales qualityScale = Scales.POINT;
+	protected int qualityValue = 0;
 	
 	/**
 	 * 
@@ -188,13 +197,17 @@ public class Photo extends DataObject {
 		//-start-///////////////
 		String locateMethod = rset.getString("locateMethod");
 		
-		if(locateMethod.equals(MAPCODE)) {
+		if(locateMethod!=null && locateMethod.equals(MAPCODE)) {
 			location = new MapcodeLocation(rset.getString("location"));
-		} else if(locateMethod.equals(GPS)) {
+		} else if(locateMethod!=null && locateMethod.equals(GPS)) {
 			location = new GPSLocation(rset.getString("location"));
 		} else {
 			location = null;
 		}
+		
+		String regionCategory = rset.getString("regionCategory");
+		String syrupCategory = rset.getString("syrupCategory");
+		
 		//-end-///////////////
 		
 	}
