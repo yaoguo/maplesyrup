@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 public class GPSLocation extends AbstractLocation {
 /**
  * 
+ * @collaboration Location
  * @author YAO GUO
  *
  */

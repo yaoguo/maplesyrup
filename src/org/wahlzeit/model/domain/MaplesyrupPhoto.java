@@ -8,11 +8,13 @@ import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.model.domain.Quality.Scales;
 
 public class MaplesyrupPhoto extends Photo {
-/**
- * 
- * @author YAO GUO
- *
- */
+ /**
+  * MaplesyrupPhoto expands the {@link Photo} class with Maplesyrup domain values.
+  * 
+  * @collaboration Maplesyrup, MaplesyrupPhoto/Maplesyrup, Factory
+  * @author Yao Guo
+  *
+  */
 	public static final String SYRUP_CATEGORY = "syrupCategory";
 	public static final String REGION_CATEGORY = "regionCategory";
 	public static final String QUALITY = "quality";

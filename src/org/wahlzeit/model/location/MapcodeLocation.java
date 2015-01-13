@@ -8,6 +8,7 @@ import com.mapcode.*;
 public class MapcodeLocation extends AbstractLocation {
 /**
  * 
+ * @collaboration Location
  * @author YAO GUO
  *
  */

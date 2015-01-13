@@ -3,6 +3,7 @@ package org.wahlzeit.model.location;
 public abstract class AbstractLocation implements Location {
 /**
  * 
+ * @collaboration Location
  * @author YAO GUO
  *
  */

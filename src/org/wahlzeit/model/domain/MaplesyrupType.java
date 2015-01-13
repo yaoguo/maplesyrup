@@ -7,6 +7,14 @@ import org.wahlzeit.services.DataObject;
 
 public class MaplesyrupType extends DataObject {
 
+/**
+ * MaplesyrupType contains all information of a Maplesyrup type.
+ * 
+ * @collaboration Maplesyrup, Manager, Factory, Type Object
+ * @author Yao Guo
+ *
+ */
+	
 	private final String TYPE_NAME = "name";
 	private final String TYPE_USAGE = "usage";
 	

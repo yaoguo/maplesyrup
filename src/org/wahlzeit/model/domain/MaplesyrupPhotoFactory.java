@@ -8,9 +8,12 @@ import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.services.SysLog;
 
 public class MaplesyrupPhotoFactory extends PhotoFactory {
-/**
+ /**
+  * MaplesyrupPhotoFactory creates new instances of {@link MaplesyrupPhoto}.
   * 
+  * @collaboration Maplesyrup, Factory
   * @author Yao Guo
+  *
   */
 	
 	/**

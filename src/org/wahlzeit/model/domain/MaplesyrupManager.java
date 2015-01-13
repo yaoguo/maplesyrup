@@ -11,6 +11,14 @@ import org.wahlzeit.services.Persistent;
 import org.wahlzeit.services.SysLog;
 
 public class MaplesyrupManager extends ObjectManager {
+	
+/**
+ * The MaplesyrupManager manages {@link Maplesyrup} instances.
+ * 
+ * @collaboration Maplesyrup, Manager
+ * @author Yao Guo
+ *
+ */
 
 	private final String SELECT_STATEMENT_MAPLESYRUP_ID = "SELECT * FROM maplesyrups WHERE id = ?";
 	private final String INSERT_STATEMENT_MAPLESYRUP = "INSERT INTO maplesyrups(id) VALUES(?)";

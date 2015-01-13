@@ -8,9 +8,12 @@ import org.wahlzeit.model.domain.Quality.Scales;
 
 public class MaplesyrupFactory {
 /**
-  * 
-  * @author Yao Guo
-  */
+ * The MaplesyrupFactory class is responsible for creating instances of the Maplesyrup domain classes.
+ * 
+ * @collaboration Factory
+ * @author Yao Guo
+ *
+ */
 
 	private static MaplesyrupFactory instance;
 	private static HashMap<String, Quality> qualityInstances = new HashMap<String, Quality>();

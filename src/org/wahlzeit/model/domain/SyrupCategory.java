@@ -4,10 +4,12 @@ import org.wahlzeit.utils.EnumValue;
 
 public enum SyrupCategory implements EnumValue {
 /**
- * 
- * @author YAO GUO
- *
- */
+  * SyrupCategory contains all information of the category of a Syrup.
+  * 
+  * @collaboration Maplesyrup, Factory, Value Object, Category
+  * @author Yao Guo
+  *
+  */
 	ExtraLight	(1, "Extra Light"),
 	Light		(2, "Light"),
 	Medium		(3, "Medium"),

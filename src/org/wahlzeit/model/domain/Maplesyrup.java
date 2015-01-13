@@ -2,9 +2,12 @@ package org.wahlzeit.model.domain;
 
 public class Maplesyrup {
 /**
-  * 
-  * @author Yao Guo
-  */
+ * This class wraps all specific domain classes for the {@link MaplesyrupPhoto}.
+ * 
+ * @collaboration Maplesyrup, MaplesyrupPhoto/Maplesyrup, Value Object, Factory 
+ * @author Yao Guo
+ *
+ */
 
 	private RegionCategory regionCategory;
 	private SyrupCategory syrupCategory;

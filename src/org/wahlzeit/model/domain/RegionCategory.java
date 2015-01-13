@@ -4,10 +4,12 @@ import org.wahlzeit.utils.EnumValue;
 
 public enum RegionCategory implements EnumValue {
 /**
- * 
- * @author YAO GUO
- *
- */
+  * RegionCategory contains all information of the category of a Region.
+  * 
+  * @collaboration Maplesyrup, Factory, Value Object, Category
+  * @author Yao Guo
+  *
+  */
 	Quebec	(1, "Quebec"),
 	Vermont	(2, "Vermont"),
 	Ontario	(3, "Ontario"),
