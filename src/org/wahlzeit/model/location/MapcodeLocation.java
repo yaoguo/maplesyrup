@@ -3,6 +3,8 @@ package org.wahlzeit.model.location;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.wahlzeit.exception.LocationException;
+
 import com.mapcode.*;
 
 public class MapcodeLocation extends AbstractLocation {
@@ -26,7 +28,7 @@ public class MapcodeLocation extends AbstractLocation {
 	/***
      * @methodtype constructor
      */
-	public MapcodeLocation(String mapcodeString) {
+	public MapcodeLocation(String mapcodeString) throws LocationException {
 		this();
 		parseMapcodeLocationString(mapcodeString);
 	}
@@ -34,7 +36,7 @@ public class MapcodeLocation extends AbstractLocation {
 	/***
      * @methodtype command
      */
-	private void parseMapcodeLocationString(String mapcodeString) {
+	private void parseMapcodeLocationString(String mapcodeString) throws LocationException {
 			
 		String location = "";
 		
@@ -45,6 +47,8 @@ public class MapcodeLocation extends AbstractLocation {
 		
 		if(pos!=0 && pos+1<len){
 			location = mapcodeString.substring(0, pos) + mapcodeString.substring(pos+1, len);
+		}else {
+			throw new LocationException("Could not parse the string into Mapcode string.");
 		}
 	}
 

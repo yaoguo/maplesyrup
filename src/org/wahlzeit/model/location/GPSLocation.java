@@ -2,6 +2,8 @@ package org.wahlzeit.model.location;
 
 import java.util.StringTokenizer;
 
+import org.wahlzeit.exception.LocationException;
+
 public class GPSLocation extends AbstractLocation {
 /**
  * 
@@ -21,7 +23,7 @@ public class GPSLocation extends AbstractLocation {
 	/***
      * @methodtype constructor
      */
-    public GPSLocation(String gpsString) {
+    public GPSLocation(String gpsString) throws LocationException {
 		this();
 		parseGPSLocationString(gpsString);
      }
@@ -29,12 +31,14 @@ public class GPSLocation extends AbstractLocation {
 	/***
      * @methodtype command
      */
-	private void parseGPSLocationString(String gpsString) {
+	private void parseGPSLocationString(String gpsString) throws LocationException {
 		StringTokenizer strTokenizer = new StringTokenizer(gpsString, GPS_DELIMITER);
 		
 		if(strTokenizer.countTokens() == 2) {
 			this.latitude = Double.parseDouble(strTokenizer.nextToken().trim());
 			this.longitude = Double.parseDouble(strTokenizer.nextToken().trim());
+		}else {
+			throw new LocationException("Could not parse the string into GPS string.");
 		}
 	}
 
@@ -72,11 +76,11 @@ public class GPSLocation extends AbstractLocation {
 	* 
 	* @methodtype assertion
 	*/
-	protected void assertValidLongitude(double longitude){
-//      if(!(longitude >= -180 && longitude <= 180)){
-//			throw new IllegalArgumentException("Invalid longitude value: " + longitude);
-//  }
-		assert (!(longitude >= -180 && longitude <= 180)): "Invalid longitude value: " + longitude;
+	protected void assertValidLongitude(double longitude) throws LocationException {
+      if(!(longitude >= -180 && longitude <= 180)){
+			throw new LocationException("Invalid longitude value: " + longitude);
+  }
+		//assert (!(longitude >= -180 && longitude <= 180)): "Invalid longitude value: " + longitude;
 
     }
 	

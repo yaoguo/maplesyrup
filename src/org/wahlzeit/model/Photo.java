@@ -23,6 +23,7 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.net.*;
 
+import org.wahlzeit.exception.LocationException;
 import org.wahlzeit.model.domain.Quality.Scales;
 import org.wahlzeit.model.location.GPSLocation;
 import org.wahlzeit.model.location.Location;
@@ -198,9 +199,17 @@ public class Photo extends DataObject {
 		String locateMethod = rset.getString("locateMethod");
 		
 		if(locateMethod!=null && locateMethod.equals(MAPCODE)) {
-			location = new MapcodeLocation(rset.getString("location"));
+			try {
+					location = new MapcodeLocation(rset.getString("location"));
+			} catch(LocationException ex) {
+					location = null;
+			}
 		} else if(locateMethod!=null && locateMethod.equals(GPS)) {
-			location = new GPSLocation(rset.getString("location"));
+			try {
+				location = new GPSLocation(rset.getString("location"));
+			} catch(LocationException ex) {
+				location = null;
+		}
 		} else {
 			location = null;
 		}

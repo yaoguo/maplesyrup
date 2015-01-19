@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 import java.io.*;
 
+import org.wahlzeit.exception.LocationException;
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.domain.Maplesyrup;
 import org.wahlzeit.model.domain.MaplesyrupFactory;
@@ -120,6 +121,9 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			UserLog.log(sb);
 			
 			us.setTwoLineMessage(us.cfg().getPhotoUploadSucceeded(), us.cfg().getKeepGoing());
+		} catch(LocationException locEx) {
+			SysLog.logThrowable(locEx);
+			us.setMessage(us.cfg().getPhotoUploadLocationFailed());
 		} catch (Exception ex) {
 			SysLog.logThrowable(ex);
 			us.setMessage(us.cfg().getPhotoUploadFailed());
